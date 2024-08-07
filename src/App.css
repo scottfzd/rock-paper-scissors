@@ -68,3 +68,8 @@
   opacity: 0.5;       
   cursor: not-allowed; 
 }
+
+
+body {
+  background-image: url('./assets/shifumi.jpg');
+}
