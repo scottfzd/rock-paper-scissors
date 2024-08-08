@@ -136,26 +136,37 @@ function GameInterface() {
     return (
         <>
 
-        {results && <h1>{results}</h1>}
-        <h1>Round {rounds}</h1>
-
-
-        <div className="options">
-            <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
-                <p>Rock</p>
-            </div>
-            <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Paper')}>
-                <p>Paper</p>
-            </div>
-            <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Scissors')}>
-                <p>Scissors</p>
-            </div>
+        <div className="uhghu">
+            <h3>ROCK <br />PAPER <br />SCISSORS</h3>
         </div>
 
-        <h1>VS</h1>
+        <div className="top-board">
+            {results && <h4>{results}</h4>}
+            <h2>ROUND {rounds}</h2>
+        </div>
 
-        <div className="computerChoice">
-            {computerChoice && <h1>{computerChoice}</h1>}
+        <div className="gameBoard">
+
+            <div className="wins"><h1>{userWins}</h1></div>
+            <div className="options">
+                <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
+                    <p>Rock</p>
+                </div>
+                <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Paper')}>
+                    <p>Paper</p>
+                </div>
+                <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Scissors')}>
+                    <p>Scissors</p>
+                </div>
+            </div>
+            
+
+            <h2 className="versus">versus</h2>
+
+            <div className="wins"><h1>{computerWins}</h1></div>
+            <div className="computerChoice">
+                {computerChoice && <h1>{computerChoice}</h1>}
+            </div>
         </div>
 
 
