@@ -107,10 +107,16 @@
   cursor: not-allowed; 
 }
 
+.option.selected.disabled {
+  border: 1px solid rgb(7, 55, 55, 0.9);
+  background-color: rgba(7, 55, 55, 0.9);
+  color: white;
+}
+
 
 body {
   background-image:
-  linear-gradient(
+  /* linear-gradient(
     175deg,
     #ffffff 20%, 
     #e0f2f1 30%, 
@@ -118,13 +124,8 @@ body {
     #e0f2f1 60%, 
     #ffffff 80%, 
     #e0f2f1 100% 
-    /* rgba(255, 255, 255, 0.8) 20%, 
-    rgba(224, 242, 241, 0.8) 30%, 
-    rgba(255, 255, 255, 0.8) 50%, 
-    rgba(224, 242, 241, 0.8) 60%, 
-    rgba(255, 255, 255, 0.8) 80%, 
-    rgba(224, 242, 241, 0.8) 100% */
-  ), url('./assets/shifumi.jpg');
+  ),  */
+  url('./assets/shifumi.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -138,12 +139,17 @@ body {
   left: 25px;
 }
 
+.uhghu h3 {
+  font-size: small;
+}
+
 
 .top-board {
-  height: 80px;
+  height: 100px;
   width: 250px;
   padding: 30px;
   position: relative;
+  bottom: 40px;
   margin: 0 auto;
 }
 
@@ -163,14 +169,15 @@ body {
   left: 10px;
   right: 10px;
 
-  font-family: 'Prociono';
+  /* font-family: 'Prociono'; */
+  font-family: 'Knewave';
 }
 
 .wins h1 {
   font-family: 'Prociono';
 }
 
-.computerChoice h1 {
+.computerChoice h2 {
   font-family: 'Prociono';
 }
 
@@ -182,9 +189,10 @@ body {
   position: relative; */
 }
 
-.gameBoard > h2 {
-  font-family: 'Prociomo';
-  font-size: smaller;
+.gameBoard > h1 {
+  font-family: 'Knewave';
+  font-size: small;
+  font-weight: bold;
 }
 
 button {
@@ -193,7 +201,32 @@ button {
 
 
 .versus {
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.modal-content h1, 
+.modal-content h3 {
+  font-family: 'Prociono';
+}
+
+.modal-content {
+  display: flex;
+  align-items: center;
+}
+
+.modal-content Button {
+  margin-top: 31px;
+  background: linear-gradient(
+    175deg, #e0f2f1, #ffffff
+  );
+  color: rgba(7, 55, 55, 0.9);
+  border: 1px solid rgb(7, 55, 55, 0.9);
+}
+
+button {
+  font-family: 'Knewave';
 }
