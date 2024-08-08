@@ -72,6 +72,11 @@
 
 
 
+
+.options {
+  display: flex;
+}
+
 .option {
   border: 1px solid rgb(7, 55, 55, 0.9);
   width: 80px;
@@ -88,18 +93,6 @@
   font-size: small;
 }
 
-.options {
-  display: flex;
-}
-
-
-.option:hover {
-  background: linear-gradient(
-    175deg, #e0f2f1, #ffffff
-  );
-  color: rgba(7, 55, 55, 0.9);
-  border: 1px solid rgb(7, 55, 55, 0.9);
-}
 
 .option.disabled {
   pointer-events: none;
@@ -107,7 +100,16 @@
   cursor: not-allowed; 
 }
 
-.option.selected.disabled {
+
+.option:not(.selected):hover {
+  background: linear-gradient(
+    45deg, #e0f2f1, #ffffff
+  );
+  color: rgba(7, 55, 55, 0.9);
+  border: 1px solid rgb(7, 55, 55, 0.9);
+}
+
+.option.selected {
   border: 1px solid rgb(7, 55, 55, 0.9);
   background-color: rgba(7, 55, 55, 0.9);
   color: white;
@@ -149,7 +151,8 @@ body {
   width: 250px;
   padding: 30px;
   position: relative;
-  bottom: 40px;
+  /* bottom: 40px; */
+  bottom: 100px;
   margin: 0 auto;
 }
 
@@ -195,6 +198,27 @@ body {
   font-weight: bold;
 }
 
+
+.gameBoard {
+  display: flex;
+  justify-content: space-around;
+  width: 1000px;
+}
+
+.userSide {
+  width: 400px;
+  /* background-color: aliceblue; */
+  position: relative;
+  right: 50px;
+}
+
+.computerSide {
+  width: 400px;
+  /* background-color: azure; */
+  position: relative;
+  left: 50px;
+}
+
 button {
   font-family: 'Knewave';
 }
@@ -205,6 +229,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* background-color: antiquewhite; */
+  position: relative;
+  /* top: 80px; */
+  top: 60px;
 }
 
 
@@ -229,4 +257,35 @@ button {
 
 button {
   font-family: 'Knewave';
+}
+
+
+
+
+
+
+
+
+
+.options {
+  /* background-color: aquamarine; */
+  height: 130px;
+  margin-top: 70px;
+}
+
+.computerChoice {
+  /* background-color: aquamarine; */
+  height: 130px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  margin-top: 70px;
+}
+
+
+
+.modal-body {
+  background: linear-gradient(
+    175deg, #e0f2f1, #ffffff
+  );
 }

@@ -102,6 +102,7 @@ function GameInterface() {
                     setRounds(prevRounds => prevRounds + 1);
                     setResults(null);
                     setButtonsDisabled(false);
+                    setSelectedOption(null);
                 }, 2500);
             }
         }
@@ -129,6 +130,7 @@ function GameInterface() {
         setComputerWins(0);
         setUserWins(0);
         setButtonsDisabled(false);
+        setSelectedOption(null);
         setFinalResults(null);
     }
 
@@ -149,25 +151,29 @@ function GameInterface() {
 
         <div className="gameBoard">
 
-            <div className="wins"><h1>{userWins}</h1></div>
-            <div className="options">
-                <button className={`option ${buttonsDisabled && selectedOption != "Rock" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
-                    Rock
-                </button>
-                <button className={`option ${buttonsDisabled && selectedOption != "Paper" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Paper')}>
-                    Paper
-                </button>
-                <button className={`option ${buttonsDisabled && selectedOption != "Scissors" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Scissors')}>
-                    Scissors
-                </button>
+            <div className="userSide">
+                <div className="wins"><h1>{userWins}</h1></div>
+                <div className="options">
+                    <button className={`option ${selectedOption != "Rock" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Rock" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
+                        Rock
+                    </button>
+                    <button className={`option ${selectedOption != "Paper" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Paper" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Paper')}>
+                        Paper
+                    </button>
+                    <button className={`option ${selectedOption != "Scissors" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Scissors" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Scissors')}>
+                        Scissors
+                    </button>
+                </div>
             </div>
             
 
             <h1 className="versus">versus</h1>
 
-            <div className="wins"><h1>{computerWins}</h1></div>
-            <div className="computerChoice">
-                {computerChoice && <h2>{computerChoice}</h2>}
+            <div className="computerSide">
+                <div className="wins"><h1>{computerWins}</h1></div>
+                <div className="computerChoice">
+                    {computerChoice && <h2>{computerChoice}</h2>}
+                </div>
             </div>
         </div>
 
@@ -179,7 +185,7 @@ function GameInterface() {
             <Modal.Body className="modal-content">
                 <h1>{finalResults}</h1>
                 <h3>{userWins} : {computerWins}</h3>
-                <Button className="custom-modal-button" onClick={handleClose}>Play Again</Button>
+                <Button className="custom-modal-button" onClick={handleClose}>PLAY AGAIN</Button>
             </Modal.Body>
             
         </Modal>
