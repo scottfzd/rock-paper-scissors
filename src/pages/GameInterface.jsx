@@ -15,8 +15,8 @@ function GameInterface() {
     const [selectedOption, setSelectedOption] = useState(null);
 
 
-    const [computerWins, setComputerWins] = useState(0);
-    const [userWins, setUserWins] = useState(0);
+    const [computerScore, setComputerScore] = useState(0);
+    const [userScore, setUserScore] = useState(0);
 
     const [show, setShow] = useState(false);
 
@@ -32,27 +32,21 @@ function GameInterface() {
         setSelectedOption(choice);
         setUserChoice(choice);
         setButtonsDisabled(true);
-
-        const computerChoice = getComputerChoice();
-        setComputerChoice(computerChoice);
+        setComputerChoice(getComputerChoice());
     }
 
     const getComputerChoice = () => {
         const choices = ["Rock", "Paper", "Scissors"];
-
         const randomIndex = Math.floor(Math.random() * 3);
 
         const computerChoice = choices[randomIndex];
-
         return computerChoice;
     }
 
-    // 2 Examine outcomes/ Calculate results and set results and wins for past round
+    // 2 Examine outcomes/ Calculate results and set results and wins for current round
 
     useEffect(() => {
-        if (userChoice && computerChoice) {
-            calculateResults();
-        }
+        if (userChoice && computerChoice) calculateResults();
     }, [userChoice, computerChoice]);
 
     const calculateResults = () => {
@@ -77,9 +71,9 @@ function GameInterface() {
         setResults(results);
 
         if (results === "You win🎉") {
-            setUserWins(prevUserWins => prevUserWins + 1);
+            setUserScore(prevUserScore => prevUserScore + 1);
         } else if (results === "You lose😒") {
-            setComputerWins(prevComputerWins => prevComputerWins + 1);
+            setComputerScore(prevComputerScore => prevComputerScore + 1);
         }   
     }
 
@@ -87,9 +81,9 @@ function GameInterface() {
 
     useEffect(() => {
 
-        if (userWins === 3) {
+        if (userScore === 3) {
             setFinalResults("You win🎉");
-        } else if (computerWins === 3) {
+        } else if (computerScore === 3) {
             setFinalResults("You lose😒");
         } else {
             if (results) {
@@ -105,7 +99,7 @@ function GameInterface() {
             }
         }
 
-    }, [userWins, computerWins, results]);
+    }, [userScore, computerScore, results]);
 
     // 4 If someone won, display score/modal
 
@@ -125,8 +119,8 @@ function GameInterface() {
         setComputerChoice(null);
         setUserChoice(null);
         setResults(null);
-        setComputerWins(0);
-        setUserWins(0);
+        setComputerScore(0);
+        setUserScore(0);
         setButtonsDisabled(false);
         setSelectedOption(null);
         setFinalResults(null);
@@ -145,7 +139,7 @@ function GameInterface() {
         <div className="gameBoard">
 
             <div className="userSide">
-                <div className="wins"><h1>{userWins}</h1></div>
+                <div className="wins"><h1>{userScore}</h1></div>
                 <div className="options">
                     <button className={`option ${selectedOption != "Rock" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Rock" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
                         Rock
@@ -163,7 +157,7 @@ function GameInterface() {
             <h1 className="versus">versus</h1>
 
             <div className="computerSide">
-                <div className="wins"><h1>{computerWins}</h1></div>
+                <div className="wins"><h1>{computerScore}</h1></div>
                 <div className="computerChoice">
                     {computerChoice && <h2>{computerChoice}</h2>}
                 </div>
@@ -177,7 +171,7 @@ function GameInterface() {
             
             <Modal.Body className="modal-content">
                 <h1>{finalResults}</h1>
-                <h3>{userWins} : {computerWins}</h3>
+                <h3>{userScore} : {computerScore}</h3>
                 <Button className="custom-modal-button" onClick={handleClose}>PLAY AGAIN</Button>
             </Modal.Body>
             
