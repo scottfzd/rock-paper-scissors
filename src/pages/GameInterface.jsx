@@ -18,104 +18,100 @@ function GameInterface() {
     const [computerScore, setComputerScore] = useState(0);
     const [userScore, setUserScore] = useState(0);
 
-    const [show, setShow] = useState(false);
-
-
-
+    const [showModal, setShowModal] = useState(false);
 
 
     // flow
 
-    // 1 Set user choice and computer choice
+    useEffect(() => {
+        if (!computerChoice) {
+            const choices = ["Rock", "Paper", "Scissors"];
+            const randomIndex = Math.floor(Math.random() * 3);
+
+            const delays = [2000, 2500, 3000];
+            const delay = delays[randomIndex];
+
+            const timer = setTimeout(() => {
+                setComputerChoice(choices[randomIndex]);
+            }, delay);
+    
+            return () => clearTimeout(timer);
+        }
+    }, [computerChoice]);
+
+    // 1 Set user choice
 
     const handleClick = (choice) => {
         setSelectedOption(choice);
         setUserChoice(choice);
         setButtonsDisabled(true);
-        setComputerChoice(getComputerChoice());
     }
 
-    const getComputerChoice = () => {
-        const choices = ["Rock", "Paper", "Scissors"];
-        const randomIndex = Math.floor(Math.random() * 3);
-
-        const computerChoice = choices[randomIndex];
-        return computerChoice;
-    }
-
-    // 2 Examine outcomes/ Calculate results and set results and wins for current round
+    // 2 Examine outcomes/ set results and scores for current round
 
     useEffect(() => {
         if (userChoice && computerChoice) calculateResults();
     }, [userChoice, computerChoice]);
 
     const calculateResults = () => {
-        let results = "";
+        let userWins;
         if (computerChoice === userChoice) {
-            results = "Tie";
-        } else {
-
-            switch (userChoice) {
-                case "Rock":
-                    results = computerChoice === "Paper" ? "You lose😒" : "You win🎉";
-                    break;
-                case "Paper":
-                    results = computerChoice === "Rock" ? "You win🎉" : "You lose😒";
-                    break;
-                case "Scissors":
-                    results = computerChoice === "Paper" ? "You win🎉" : "You lose😒";
-                    break;
-            }
+            setResults("Tie");
+            return;
         }
 
-        setResults(results);
+        switch (userChoice) {
+            case "Rock":
+                userWins = computerChoice === "Scissors";
+                break;
+            case "Paper":
+                userWins = computerChoice === "Rock";
+                break;
+            case "Scissors":
+                userWins = computerChoice === "Paper";
+                break;
+        }
 
-        if (results === "You win🎉") {
+        if (userWins) {
+            setResults("You win🎉");
             setUserScore(prevUserScore => prevUserScore + 1);
-        } else if (results === "You lose😒") {
+        } else {
+            setResults("You lose😒");
             setComputerScore(prevComputerScore => prevComputerScore + 1);
-        }   
+        } 
     }
 
-    // 3 Check if anyone won the game and then either set another round or set final results
+    // 3 Check if final winner and either set another round or set final results
 
     useEffect(() => {
 
-        if (userScore === 3) {
-            setFinalResults("You win🎉");
-        } else if (computerScore === 3) {
-            setFinalResults("You lose😒");
-        } else {
-            if (results) {
-                setTimeout(() => {
-                    // Reset for next round
-                    setComputerChoice(null);
-                    setUserChoice(null);
-                    setRounds(prevRounds => prevRounds + 1);
-                    setResults(null);
-                    setButtonsDisabled(false);
-                    setSelectedOption(null);
-                }, 2500);
-            }
+        if (userScore === 3 || computerScore === 3) {
+            userScore === 3 ? setFinalResults("You win🎉") : setFinalResults("You lose😒");
+        } else if (results) {
+            setTimeout(() => {
+                // Reset for next round
+                setComputerChoice(null);
+                setUserChoice(null);
+                setRounds(prevRounds => prevRounds + 1);
+                setResults(null);
+                setButtonsDisabled(false);
+                setSelectedOption(null);
+            }, 2500);
         }
 
     }, [userScore, computerScore, results]);
 
-    // 4 If someone won, display score/modal
+    // 4 If final winner, display final results/modal
 
     useEffect(() => {
-        if (finalResults) {
-            handleShow();
-        }
+        if (finalResults) setShowModal(true);
     }, [finalResults]);
-
-    const handleShow = () => setShow(true);
 
     // 5 Play again
 
     const handleClose = () => {
-        setShow(false);
-        setRounds(prevState => 1);
+        setShowModal(false);
+        setRounds(1);
         setComputerChoice(null);
         setUserChoice(null);
         setResults(null);
@@ -159,7 +155,19 @@ function GameInterface() {
             <div className="computerSide">
                 <div className="wins"><h1>{computerScore}</h1></div>
                 <div className="computerChoice">
-                    {computerChoice && <h2>{computerChoice}</h2>}
+
+                    {(!userChoice && computerChoice) && <h2>Opponent made a pick</h2>}
+
+                    {(userChoice && computerChoice) && computerChoice && <h2>{computerChoice}</h2>}
+
+                    {!computerChoice &&
+                        <div className="container">
+                            <div className="button"></div>
+                            <div className="button"></div>
+                            <div className="button"></div>
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -167,7 +175,7 @@ function GameInterface() {
 
 
 
-        <Modal show={show} onHide={handleClose} centered>
+        <Modal show={showModal} onHide={handleClose} centered>
             
             <Modal.Body className="modal-content">
                 <h1>{finalResults}</h1>
