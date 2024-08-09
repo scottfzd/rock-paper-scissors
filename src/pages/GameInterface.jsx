@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-// import '../App.css';
 import { Modal, Button } from 'react-bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+
+import { Link } from 'react-router-dom';
 
 function GameInterface() {
 
@@ -12,6 +13,7 @@ function GameInterface() {
     const [computerChoice, setComputerChoice] = useState(null);
     const [results, setResults] = useState(null);
     const [finalResults, setFinalResults] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(null);
 
 
     const [computerWins, setComputerWins] = useState(0);
@@ -28,6 +30,7 @@ function GameInterface() {
     // 1 Set user choice and computer choice
 
     const handleClick = (choice) => {
+        setSelectedOption(choice);
         setUserChoice(choice);
         setButtonsDisabled(true);
 
@@ -101,6 +104,7 @@ function GameInterface() {
                     setRounds(prevRounds => prevRounds + 1);
                     setResults(null);
                     setButtonsDisabled(false);
+                    setSelectedOption(null);
                 }, 2500);
             }
         }
@@ -128,6 +132,8 @@ function GameInterface() {
         setComputerWins(0);
         setUserWins(0);
         setButtonsDisabled(false);
+        setSelectedOption(null);
+        setFinalResults(null);
     }
 
     
@@ -136,9 +142,13 @@ function GameInterface() {
     return (
         <>
 
-        <div className="uhghu">
-            <h3>ROCK <br />PAPER <br />SCISSORS</h3>
-        </div>
+        <nav>
+            <Link to='/' className="homelink">
+                <div className="icon">
+                    <h3>ROCK <br />PAPER <br />SCISSORS</h3>
+                </div>
+            </Link>
+        </nav>
 
         <div className="top-board">
             {results && <h4>{results}</h4>}
@@ -147,39 +157,43 @@ function GameInterface() {
 
         <div className="gameBoard">
 
-            <div className="wins"><h1>{userWins}</h1></div>
-            <div className="options">
-                <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
-                    <p>Rock</p>
-                </div>
-                <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Paper')}>
-                    <p>Paper</p>
-                </div>
-                <div className={`option ${buttonsDisabled ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Scissors')}>
-                    <p>Scissors</p>
+            <div className="userSide">
+                <div className="wins"><h1>{userWins}</h1></div>
+                <div className="options">
+                    <button className={`option ${selectedOption != "Rock" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Rock" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Rock')}>
+                        Rock
+                    </button>
+                    <button className={`option ${selectedOption != "Paper" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Paper" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Paper')}>
+                        Paper
+                    </button>
+                    <button className={`option ${selectedOption != "Scissors" ? "" : "selected"} ${buttonsDisabled && selectedOption != "Scissors" ? "disabled" : ""}`} onClick={() => !buttonsDisabled && handleClick('Scissors')}>
+                        Scissors
+                    </button>
                 </div>
             </div>
             
 
-            <h2 className="versus">versus</h2>
+            <h1 className="versus">versus</h1>
 
-            <div className="wins"><h1>{computerWins}</h1></div>
-            <div className="computerChoice">
-                {computerChoice && <h1>{computerChoice}</h1>}
+            <div className="computerSide">
+                <div className="wins"><h1>{computerWins}</h1></div>
+                <div className="computerChoice">
+                    {computerChoice && <h2>{computerChoice}</h2>}
+                </div>
             </div>
         </div>
 
 
 
 
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>{finalResults}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{userWins}:{computerWins}</Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Play Again</Button>
-            </Modal.Footer>
+        <Modal show={show} onHide={handleClose} centered>
+            
+            <Modal.Body className="modal-content">
+                <h1>{finalResults}</h1>
+                <h3>{userWins} : {computerWins}</h3>
+                <Button className="custom-modal-button" onClick={handleClose}>PLAY AGAIN</Button>
+            </Modal.Body>
+            
         </Modal>
         </>
     );

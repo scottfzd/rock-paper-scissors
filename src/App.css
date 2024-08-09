@@ -1,8 +1,10 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .logo {
@@ -72,45 +74,11 @@
 
 
 
-.option {
-  border: 1px solid rgb(7, 55, 55, 0.9);
-  width: 80px;
-  height: 80px;
-  border-radius: 80px;
-  background-color: rgba(7, 55, 55, 0.9);
-  color: white;
-  margin: 25px;
-  cursor: pointer;
-  display: flex;
-  align-items: center; 
-  justify-content: center;
-  font-family: 'Prociono';
-  font-size: small;
-}
-
-.options {
-  display: flex;
-}
-
-
-.option:hover {
-  background: linear-gradient(
-    175deg, #e0f2f1, #ffffff
-  );
-  color: rgba(7, 55, 55, 0.9);
-  border: 1px solid rgb(7, 55, 55, 0.9);
-}
-
-.option.disabled {
-  pointer-events: none;
-  opacity: 0.5;       
-  cursor: not-allowed; 
-}
 
 
 body {
   background-image:
-  linear-gradient(
+  /* linear-gradient(
     175deg,
     #ffffff 20%, 
     #e0f2f1 30%, 
@@ -118,33 +86,40 @@ body {
     #e0f2f1 60%, 
     #ffffff 80%, 
     #e0f2f1 100% 
-    /* rgba(255, 255, 255, 0.8) 20%, 
-    rgba(224, 242, 241, 0.8) 30%, 
-    rgba(255, 255, 255, 0.8) 50%, 
-    rgba(224, 242, 241, 0.8) 60%, 
-    rgba(255, 255, 255, 0.8) 80%, 
-    rgba(224, 242, 241, 0.8) 100% */
-  ), url('./assets/shifumi.jpg');
+  ),  */
+  url('./assets/shifumi.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   /* background-blend-mode: overlay; */
 }
 
-.uhghu {
+nav {
+  height: 59px;
+  background-color: aliceblue;
+}
+
+nav .icon {
   font-family: 'Knewave';
   position: absolute;
-  top: 25px;
+  top: 8px;
   left: 25px;
+  /* background-color: aquamarine; */
+}
+
+nav .icon h3 {
+  font-size: small;
 }
 
 
 .top-board {
-  height: 80px;
+  height: 100px;
   width: 250px;
+  margin: 0 auto;
   padding: 30px;
   position: relative;
-  margin: 0 auto;
+  top: 70px;
+  /* background-color: aquamarine; */
 }
 
 .top-board h4 {
@@ -156,44 +131,140 @@ body {
   font-family: 'Prociono';
 }
 
-
 .top-board h2 {
   position: absolute;
   bottom: 10px;
   left: 10px;
   right: 10px;
 
+  /* font-family: 'Prociono'; */
+  font-family: 'Knewave';
+}
+
+.gameBoard {
+  width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  top: 130px;
+}
+
+.userSide {
+  width: 400px;
+  /* background-color: aliceblue; */
+}
+
+.computerSide {
+  width: 400px;
+  /* background-color: azure; */
+}
+
+.options {
+  /* background-color: aquamarine; */
+  height: 130px;
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.option {
+  border: 1px solid rgb(7, 55, 55, 0.9);
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  background-color: rgba(7, 55, 55, 0.9);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
   font-family: 'Prociono';
+  font-size: small;
+}
+
+.option.disabled {
+  pointer-events: none;
+  opacity: 0.5;       
+  cursor: not-allowed; 
+}
+
+.option:not(.selected):hover {
+  background: linear-gradient(
+    45deg, #e0f2f1, #ffffff
+  );
+  color: rgba(7, 55, 55, 0.9);
+  border: 1px solid rgb(7, 55, 55, 0.9);
+}
+
+.option.selected {
+  border: 1px solid rgb(7, 55, 55, 0.9);
+  background-color: rgba(7, 55, 55, 0.9);
+  color: white;
+}
+
+.computerChoice {
+  /* background-color: aquamarine; */
+  height: 130px;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.computerChoice h2 {
+  font-family: 'Prociono';
+}
+
+.versus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 50px;
 }
 
 .wins h1 {
   font-family: 'Prociono';
 }
 
-.computerChoice h1 {
+.gameBoard > h1 {
+  font-family: 'Knewave';
+  font-size: small;
+  font-weight: bold;
+}
+
+.modal-content {
+  display: flex;
+  align-items: center;
+}
+
+.modal-content Button {
+  margin-top: 31px;
+  background: linear-gradient(
+    175deg, #e0f2f1, #ffffff
+  );
+  color: rgba(7, 55, 55, 0.9);
+  border: 1px solid rgb(7, 55, 55, 0.9);
+}
+
+.modal-body {
+  background: linear-gradient(
+    175deg, #e0f2f1, #ffffff
+  );
+}
+
+.modal-content h1, 
+.modal-content h3 {
   font-family: 'Prociono';
 }
 
-.computerChoice {
-  height: 100px; 
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative; */
+
+.homelink {
+  color: #213547;;
 }
 
-.gameBoard > h2 {
-  font-family: 'Prociomo';
-  font-size: smaller;
-}
-
-button {
-  font-family: 'Knewave';
-}
-
-
-.versus {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.homelink:hover {
+  color: #213547;;
 }
