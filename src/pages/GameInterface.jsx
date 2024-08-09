@@ -3,7 +3,6 @@ import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-import { Link } from 'react-router-dom';
 
 function GameInterface() {
 
@@ -51,7 +50,7 @@ function GameInterface() {
     // 2 Examine outcomes/ Calculate results and set results and wins for past round
 
     useEffect(() => {
-        if (userChoice != null && computerChoice != null) {
+        if (userChoice && computerChoice) {
             calculateResults();
         }
     }, [userChoice, computerChoice]);
@@ -114,7 +113,7 @@ function GameInterface() {
     // 4 If someone won, display score/modal
 
     useEffect(() => {
-        if (finalResults != null) {
+        if (finalResults) {
             handleShow();
         }
     }, [finalResults]);
