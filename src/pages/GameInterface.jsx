@@ -38,11 +38,11 @@ function GameInterface() {
     }
 
     const getComputerChoice = () => {
-        const array = ["Rock", "Paper", "Scissors"];
+        const choices = ["Rock", "Paper", "Scissors"];
 
         const randomIndex = Math.floor(Math.random() * 3);
 
-        const computerChoice = array[randomIndex];
+        const computerChoice = choices[randomIndex];
 
         return computerChoice;
     }
@@ -86,8 +86,6 @@ function GameInterface() {
     // 3 Check if anyone won the game and then either set another round or set final results
 
     useEffect(() => {
-        console.log(`Computer Wins: ${computerWins}`);
-        console.log(`User Wins: ${userWins}`);
 
         if (userWins === 3) {
             setFinalResults("You win🎉");
@@ -96,7 +94,6 @@ function GameInterface() {
         } else {
             if (results) {
                 setTimeout(() => {
-                    console.log("Delayed for 1 second.");
                     // Reset for next round
                     setComputerChoice(null);
                     setUserChoice(null);
