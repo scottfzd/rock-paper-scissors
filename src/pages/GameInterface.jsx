@@ -141,15 +141,6 @@ function GameInterface() {
 
     return (
         <>
-
-        <nav>
-            <Link to='/' className="homelink">
-                <div className="icon">
-                    <h3>ROCK <br />PAPER <br />SCISSORS</h3>
-                </div>
-            </Link>
-        </nav>
-
         <div className="top-board">
             {results && <h4>{results}</h4>}
             <h2>ROUND {rounds}</h2>

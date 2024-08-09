@@ -95,8 +95,8 @@ body {
 }
 
 nav {
-  height: 59px;
-  background-color: aliceblue;
+  height: 56px;
+  background-color: rgba(7, 55, 55, 0.7);
 }
 
 nav .icon {
@@ -195,7 +195,8 @@ nav .icon h3 {
     45deg, #e0f2f1, #ffffff
   );
   color: rgba(7, 55, 55, 0.9);
-  border: 1px solid rgb(7, 55, 55, 0.9);
+  /* border: 1px solid rgb(7, 55, 55, 0.9); */
+  border: none;
 }
 
 .option.selected {
@@ -240,14 +241,14 @@ nav .icon h3 {
   align-items: center;
 }
 
-.modal-content Button {
+/* .modal-content Button {
   margin-top: 31px;
   background: linear-gradient(
     175deg, #e0f2f1, #ffffff
   );
   color: rgba(7, 55, 55, 0.9);
   border: 1px solid rgb(7, 55, 55, 0.9);
-}
+} */
 
 .modal-body {
   background: linear-gradient(
@@ -267,4 +268,37 @@ nav .icon h3 {
 
 .homelink:hover {
   color: #213547;;
+}
+
+
+.play-button {
+  border: 1px solid rgb(7, 55, 55, 0.9);
+  background-color: rgba(7, 55, 55, 0.9);
+  color: white;
+}
+
+.play-button:hover {
+  border: none;
+  background: linear-gradient(
+    45deg, #e0f2f1, #ffffff);
+  color: rgb(7, 55, 55, 0.9);;
+}
+
+.custom-modal-button.btn.btn-primary:hover {
+  border: none;
+  background: linear-gradient(
+    45deg, #e0f2f1, #ffffff);
+  color: rgb(7, 55, 55, 0.9);
+}
+
+.modal-content Button {
+  /* margin-top: 31px;
+  background-color: rgba(7, 55, 55, 0.9);
+  color: white;
+  border: none; */
+
+  border: none;
+  background: linear-gradient(
+    45deg, #e0f2f1, #ffffff);
+  color: rgb(7, 55, 55, 0.9);
 }
