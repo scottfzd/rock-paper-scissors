@@ -20,6 +20,19 @@ function GameInterface() {
 
     const [showModal, setShowModal] = useState(false);
 
+    const [activeIndex, setActiveIndex] = useState(0);
+    const buttonCount = 3;
+    const intervalTime = 700; 
+    useEffect(() => {
+
+        const interval = setInterval(() => {
+            setActiveIndex(prevIndex => (prevIndex + 1) % buttonCount);
+        }, intervalTime);
+
+        return () => clearInterval(interval); 
+    }, [buttonCount, intervalTime]);
+
+
 
     // flow
 
@@ -28,7 +41,7 @@ function GameInterface() {
             const choices = ["Rock", "Paper", "Scissors"];
             const randomIndex = Math.floor(Math.random() * 3);
 
-            const delays = [2000, 2500, 3000];
+            const delays = [2500, 3000, 3500];
             const delay = delays[randomIndex];
 
             const timer = setTimeout(() => {
@@ -162,9 +175,9 @@ function GameInterface() {
 
                     {!computerChoice &&
                         <div className="container">
-                            <div className="button"></div>
-                            <div className="button"></div>
-                            <div className="button"></div>
+                            <div className={`button ${activeIndex === 0 ? "active" : ""}`}></div>
+                            <div className={`button ${activeIndex === 1 ? "active" : ""}`}></div>
+                            <div className={`button ${activeIndex === 2 ? "active" : ""}`}></div>
                         </div>
                     }
 

@@ -319,3 +319,11 @@ nav .icon h3 {
   align-items: center;
   justify-content: center;
 }
+
+.button.active {
+  background: linear-gradient(
+    45deg, #e0f2f1, #ffffff
+  );
+  color: rgba(7, 55, 55, 0.9);
+  border: none;
+}
