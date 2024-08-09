@@ -12,7 +12,7 @@ function HomePage() {
 
     return (
         <>
-        <h1 style={{fontFamily: 'Prociono'}}>HOME</h1>
+        <h2 style={{fontFamily: 'Knewave'}}>HOME</h2>
         <button onClick={handleClick} className="play-button">Play</button>
         </>
     );
