@@ -3,6 +3,8 @@ import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
+import { Link } from 'react-router-dom';
+
 function GameInterface() {
 
     const [rounds, setRounds] = useState(1);
@@ -140,9 +142,13 @@ function GameInterface() {
     return (
         <>
 
-        <div className="uhghu">
-            <h3>ROCK <br />PAPER <br />SCISSORS</h3>
-        </div>
+        <nav>
+            <Link to='/' className="homelink">
+                <div className="icon">
+                    <h3>ROCK <br />PAPER <br />SCISSORS</h3>
+                </div>
+            </Link>
+        </nav>
 
         <div className="top-board">
             {results && <h4>{results}</h4>}
